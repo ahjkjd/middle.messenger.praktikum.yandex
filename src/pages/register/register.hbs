@@ -1,0 +1,18 @@
+<main class="sign">
+  <h2 class="sign__heading">Регистрация</h2>
+  <form class="sign__form">
+    <ul class="sign__inputs">
+      {{> Input id="email" class="sign" type="email" caption="Почта" error=""}}
+      {{> Input id="login" class="sign" type="text" caption="Логин" error=""}}
+      {{> Input id="first_name" class="sign" type="text" caption="Имя" error=""}}
+      {{> Input id="second_name" class="sign" type="text" caption="Фамилия" error=""}}
+      {{> Input id="phone" class="sign" type="text" caption="Телефон" error=""}}
+      {{> Input id="password" class="sign" type="password" caption="Пароль" error=""}}
+      {{> Input id="password-2" class="sign" type="password" caption="Пароль (ещё раз)" error=""}}
+    </ul>
+    <div>
+      <button type="submit" class="submit-button" data-page="chats">Зарегистрироваться</button>
+    </div>
+  </form>
+  <a href="#" class="sign__link" data-page="login">Войти</a>
+</main>

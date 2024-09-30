@@ -1,0 +1,33 @@
+<main class="profile">
+  <button class="profile__avatar-container" id="avatar-edit-button">
+    <img class="profile__avatar" src="/src/images/avatar.svg" />
+  </button>
+  {{#if profileEdit.disabled}}
+  <h2 class="profile__heading">{{user.first_name}}</h2>
+  {{/if}}
+  <form class="profile__form">
+    <ul class="profile__inputs">
+      {{#if profileEdit.changingPassword}}
+      {{> Input id="oldPassword" class="profile-input" type="password" caption="Старый пароль"}}
+      {{> Input id="newPassword" class="profile-input" type="password" caption="Новый пароль"}}
+      {{> Input id="newPassword-2" class="profile-input" type="password" caption="Повторите новый пароль"}}
+      {{else}}
+      {{> Input id="email" class="profile-input" type="email" value=user.email caption="Почта"}}
+      {{> Input id="login" class="profile-input" type="text" value=user.login caption="Логин"}}
+      {{> Input id="first_name" class="profile-input" type="text" value=user.first_name caption="Имя"}}
+      {{> Input id="second_name" class="profile-input" type="text" value=user.second_name caption="Фамилия"}}
+      {{> Input id="display_name" class="profile-input" type="text" value=user.display_name caption="Имя в чате"}}
+      {{> Input id="phone" class="profile-input" type="text" value=user.phone caption="Телефон"}}
+      {{/if}}
+    </ul>
+    <div class="profile__buttons">
+      {{#if profileEdit.disabled}}
+      <button type="button" class="profile__edit-button" id="profile-edit-button">Изменить данные</button>
+      <button type="button" class="profile__edit-button" id="password-edit-button">Изменить пароль</button>
+      <button type="button" class="profile__exit-button" data-page="login">Выйти</button>
+      {{else}}
+      <button type="submit" class="submit-button" id="profile-save-button">Сохранить</button>
+      {{/if}}
+    </div>
+  </form>
+</main>
