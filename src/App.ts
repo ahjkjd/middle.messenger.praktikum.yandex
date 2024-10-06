@@ -1,5 +1,5 @@
 import Handlebars from 'handlebars';
-import * as Pages from './pages';
+import * as Pages from './pages/index.js';
 
 // Register partials
 import Input from './components/Input.js';
@@ -12,8 +12,8 @@ const testUser = {
   first_name: 'Иван',
   second_name: 'Иванов',
   display_name: 'Иван',
-  phone: '+7 (123) 456 78 90'
-}
+  phone: '+7 (123) 456 78 90',
+};
 
 export default class App {
   constructor() {
@@ -38,13 +38,13 @@ export default class App {
       template = Handlebars.compile(Pages.Err);
       this.appElement.innerHTML = template({
         number: 404,
-        message: "Не туда попали",
+        message: 'Не туда попали',
       });
     } else if (this.state.currentPage === 'serverError') {
       template = Handlebars.compile(Pages.Err);
       this.appElement.innerHTML = template({
         number: 500,
-        message: "Мы уже фиксим",
+        message: 'Мы уже фиксим',
       });
     } else if (this.state.currentPage === 'login') {
       template = Handlebars.compile(Pages.Login);
@@ -95,8 +95,8 @@ export default class App {
         button.addEventListener('click', (e) => {
           e.preventDefault();
           this.changePage(e.target.dataset.page);
-        })
-      };
+        });
+      }
     });
   }
 
