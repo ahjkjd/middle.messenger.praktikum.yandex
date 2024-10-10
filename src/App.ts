@@ -1,21 +1,39 @@
 import Handlebars from 'handlebars';
 import * as Pages from './pages/index.js';
+import { Err } from './pages/err/err';
+import { Login } from './pages/login/login';
+import { Register } from './pages/register/register';
+import { Profile } from './pages/profile/profile';
 
-// Register partials
-import Input from './components/Input.js';
+interface User {
+  email: string,
+  login: string,
+  first_name: string,
+  second_name: string,
+  display_name: string,
+  phone: string,
+}
 
-Handlebars.registerPartial('Input', Input);
+interface AppState {
+  currentPage: string;
+  user: User;
+  profileEdit?: object;
+}
 
-const testUser = {
+const testUser: User = {
   email: 'pochta@yandex.ru',
   login: 'ivanivanov',
   first_name: 'Иван',
   second_name: 'Иванов',
   display_name: 'Иван',
-  phone: '+7 (123) 456 78 90',
+  phone: '+71234567890',
 };
 
 export default class App {
+  private state: AppState;
+
+  private appElement: HTMLElement;
+  
   constructor() {
     this.state = {
       currentPage: 'menu',
@@ -26,7 +44,7 @@ export default class App {
       },
       user: testUser,
     };
-    this.appElement = document.getElementById('app');
+    this.appElement = document.getElementById('app') as HTMLElement;
   }
 
   render() {
@@ -35,29 +53,33 @@ export default class App {
       template = Handlebars.compile(Pages.Menu);
       this.appElement.innerHTML = template({});
     } else if (this.state.currentPage === 'notFound') {
-      template = Handlebars.compile(Pages.Err);
-      this.appElement.innerHTML = template({
+      const notFoundPage = new Err({
         number: 404,
         message: 'Не туда попали',
       });
+      this.appElement.replaceChildren(notFoundPage.getContent());
     } else if (this.state.currentPage === 'serverError') {
-      template = Handlebars.compile(Pages.Err);
-      this.appElement.innerHTML = template({
+      const serverErrorPage = new Err({
         number: 500,
         message: 'Мы уже фиксим',
       });
+      this.appElement.replaceChildren(serverErrorPage.getContent());
     } else if (this.state.currentPage === 'login') {
-      template = Handlebars.compile(Pages.Login);
-      this.appElement.innerHTML = template({});
+      const LoginPage = new Login();
+      this.appElement.replaceChildren(LoginPage.getContent());
     } else if (this.state.currentPage === 'register') {
-      template = Handlebars.compile(Pages.Register);
-      this.appElement.innerHTML = template({});
+      const RegisterPage = new Register();
+      this.appElement.replaceChildren(RegisterPage.getContent());
     } else if (this.state.currentPage === 'profile') {
-      template = Handlebars.compile(Pages.Profile);
-      this.appElement.innerHTML = template({
-        user: this.state.user,
-        profileEdit: this.state.profileEdit,
-      });
+      // template = Handlebars.compile(Pages.Profile);
+      // this.appElement.innerHTML = template({
+      //   user: this.state.user,
+      //   profileEdit: this.state.profileEdit,
+      // });
+
+      const ProfilePage = new Profile(testUser);
+      this.appElement.replaceChildren(ProfilePage.getContent());
+      console.log(ProfilePage);
     } else if (this.state.currentPage === 'chats') {
       template = Handlebars.compile(Pages.Chats);
       this.appElement.innerHTML = template({
@@ -80,9 +102,11 @@ export default class App {
       }
     }
 
+    // Temporary, to be replaced with routing
+    // Breaks whan a page rerenders
     const links = document.querySelectorAll('a');
     links.forEach(link => {
-      link.addEventListener('click', (e) => {
+      link.addEventListener('click', (e: any) => {
         e.preventDefault();
         this.changePage(e.target.dataset.page);
       });
@@ -92,7 +116,7 @@ export default class App {
     const buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
       if (button.dataset.page) {
-        button.addEventListener('click', (e) => {
+        button.addEventListener('click', (e: any) => {
           e.preventDefault();
           this.changePage(e.target.dataset.page);
         });
@@ -100,7 +124,7 @@ export default class App {
     });
   }
 
-  changePage(page) {
+  changePage(page: string) {
     this.state.currentPage = page;
     this.render();
   }
