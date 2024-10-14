@@ -1,7 +1,7 @@
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import Block from '../../framework/Block';
-import { validateEmail, validateLogin, validateName, validateSurname, validatePhone, validatePassword, validatePasswordRepeat } from '../../utils/validation';
+import { validateEmail, validateLogin, validateName, validatePhone, validatePassword, validatePasswordRepeat } from '../../utils/validation';
 
 export class Register extends Block {
   constructor() {
@@ -61,7 +61,7 @@ export class Register extends Block {
         class: 'sign',
         type: 'password',
         onBlur: (event) => this.validatePasswordRepeat((event.target as HTMLInputElement).value),
-        onChange: () => {},
+        onChange: (event) => this.props.formData.passwordRepeat = ((event.target as HTMLInputElement).value),
       }),
       SubmitButton: new Button({
         text: 'Зарегистрироваться',
@@ -87,7 +87,6 @@ export class Register extends Block {
       phoneError: '',
       passwordError: '',
       passwordRepeatError: '',
-      password: '',
       formData: {
         email: '',
         login: '',
@@ -95,36 +94,51 @@ export class Register extends Block {
         surname: '',
         phone: '',
         password: '',
+        passwordRepeat: '',
       },
     });
   }
 
   validateEmail(value: string): void {
-    this.setProps(validateEmail(value));
+    this.setProps({
+      emailError: validateEmail(value),
+    });
   }
 
   validateLogin(value: string): void {
-    this.setProps(validateLogin(value));
+    this.setProps({
+      loginError: validateLogin(value),
+    });
   }
 
   validateName(value: string): void {
-    this.setProps(validateName(value));
+    this.setProps({
+      nameError: validateName(value),
+    });
   }
 
   validateSurname(value: string): void {
-    this.setProps(validateSurname(value));
+    this.setProps({
+      surnameError: validateName(value),
+    });
   }
 
   validatePhone(value: string): void {
-    this.setProps(validatePhone(value));
+    this.setProps({
+      phoneError: validatePhone(value),
+    });
   }
 
   validatePassword(value: string): void {
-    this.setProps(validatePassword(value));
+    this.setProps({
+      passwordError: validatePassword(value),
+    });
   }
 
   validatePasswordRepeat(value: string): void {
-    this.setProps(validatePasswordRepeat(value, this.props.formData.password));
+    this.setProps({
+      passwordRepeatError: validatePasswordRepeat(value, this.props.formData.password),
+    });
   }
 
   override render() {
@@ -173,7 +187,7 @@ export class Register extends Block {
           {{{ SubmitButton }}}
         </div>
       </form>
-      <a href="#" class="sign__link" data-page="register">Войти</a>
+      <a href="#" class="sign__link" data-page="login">Войти</a>
     </main>`;
   }
 }

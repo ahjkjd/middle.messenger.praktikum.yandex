@@ -1,83 +1,60 @@
 // Regex found online
-export const validateEmail = (value: string): object => {
+export const validateEmail = (value: string): string => {
   if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value))) {
-    return { emailError: 'Некорректный email адрес.' };
+    return 'Некорректный email адрес.';
   } else {
-    return { emailError: '' };
+    return '';
   }
 };
 
-export const validateLogin = (value: string): object => {
+export const validateLogin = (value: string): string => {
   if (value.length < 3 || value.length > 20) {
-    return { loginError: 'Логин должен сожержать от 3 до 20 символов.' };
+    return 'Логин должен сожержать от 3 до 20 символов.';
   } else if (!(/^[a-zA-Z0-9-_]{3,20}$/.test(value))) {
-    return { loginError: 'Допустимы только латиниские буквы, цифры, дефис и нижнее подчёркивание.' };
+    return 'Логин должен сожержать только латиниские буквы, цифры, дефис и нижнее подчёркивание.';
   } else if ((/^[0-9]*$/.test(value))) {
-    return { loginError: 'Логин не может состоять только из цифр.' };
+    return 'Логин не может состоять только из цифр.';
   } else {
-    return { loginError: '' };
+    return '';
   }
 };
 
-export const validateName = (value: string): object => {
+export const validateName = (value: string): string => {
   if (!(/^[a-zA-Zа-яА-Я]+$/.test(value))) {
-    return { nameError: 'Допустимы только латиниские и кирилические буквы.' };
+    return 'Имя может сожержать только латиниские и кирилические буквы.';
   } else if (!(/^[A-ZА-Я]/.test(value))) {
-    return { nameError: 'Первая буква должна быть заглавной.' };
+    return 'Первая буква имени должна быть заглавной.';
   } else {
-    return { nameError: '' };
+    return '';
   }
 };
 
-export const validateSurname = (value: string): object => {
-  if (!(/^[a-zA-Zа-яА-Я]+$/.test(value))) {
-    return { surnameError: 'Допустимы только латиниские и кирилические буквы.' };
-  } else if (!(/^[A-ZА-Я]/.test(value))) {
-    return { surnameError: 'Первая буква должна быть заглавной.' };
-  } else {
-    return { surnameError: '' };
-  }
-};
-
-export const validatePhone = (value: string): object => {
+export const validatePhone = (value: string): string => {
   if (value.length < 10 || value.length > 15) {
-    return { phoneError: 'Длина номера от 10 до 15 символов.' };
+    return 'Длина номера от 10 до 15 символов.';
   } else if (!(/^[0-9+][0-9]+$/.test(value))) {
-    return { phoneError: 'Допустимы только цифры и плюс в начале.' };
+    return 'Номер должен сожержать только цифры и плюс в начале.';
   } else {
-    return { phoneError: '' };
+    return '';
   }
 };
 
-// Writing the password to props to compare with the next input. There should be a better way to do it.
-export const validatePassword = (value: string): object => {
+export const validatePassword = (value: string): string => {
   if (value.length < 8 || value.length > 40) {
-    return {
-      password: value,
-      passwordError: 'Пароль должен сожержать от 8 до 40 символов.',
-    };
+    return 'Пароль должен сожержать от 8 до 40 символов.';
   } else if (!(/[A-Z]+/.test(value))) {
-    return {
-      password: value,
-      passwordError: 'Пароль должен сожержать заглавную букву.',
-    };
+    return 'Пароль должен сожержать заглавную букву.';
   } else if (!(/[0-9]+/.test(value))) {
-    return {
-      password: value,
-      passwordError: 'Пароль должен сожержать цифру.',
-    };
+    return 'Пароль должен сожержать цифру.';
   } else {
-    return {
-      password: value,
-      passwordError: '',
-    };
+    return '';
   }
 };
 
-export const validatePasswordRepeat = (value: string, password: string): object => {
+export const validatePasswordRepeat = (value: string, password: string): string => {
   if (value !== password) {
-    return { passwordRepeatError: 'Пароли не совпадают.' };
+    return 'Пароли не совпадают.';
   } else {
-    return { passwordRepeatError: '' };
+    return '';
   }
 };

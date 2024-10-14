@@ -3,21 +3,11 @@ import * as Pages from './pages/index.js';
 import { Err } from './pages/err/err';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
-import { Profile } from './pages/profile/profile';
-
-interface User {
-  email: string,
-  login: string,
-  first_name: string,
-  second_name: string,
-  display_name: string,
-  phone: string,
-}
+import { Profile, User } from './pages/profile/profile';
 
 interface AppState {
   currentPage: string;
   user: User;
-  profileEdit?: object;
 }
 
 const testUser: User = {
@@ -37,11 +27,6 @@ export default class App {
   constructor() {
     this.state = {
       currentPage: 'menu',
-      profileEdit: {
-        disabled: true,
-        changingData: false,
-        changingPassword: false,
-      },
       user: testUser,
     };
     this.appElement = document.getElementById('app') as HTMLElement;
@@ -79,7 +64,6 @@ export default class App {
 
       const ProfilePage = new Profile(testUser);
       this.appElement.replaceChildren(ProfilePage.getContent());
-      console.log(ProfilePage);
     } else if (this.state.currentPage === 'chats') {
       template = Handlebars.compile(Pages.Chats);
       this.appElement.innerHTML = template({
@@ -90,18 +74,6 @@ export default class App {
   }
 
   attachEventListeners() {
-    if (this.state.currentPage === 'profile') {
-      if (this.state.profileEdit.disabled === true) {
-        const profileEditButton = document.getElementById('profile-edit-button');
-        const passwordEditButton = document.getElementById('password-edit-button');
-        profileEditButton.addEventListener('click', () => this.enableProfileEdit());
-        passwordEditButton.addEventListener('click', () => this.enablePasswordEdit());
-      } else {
-        const profileSaveButton = document.getElementById('profile-save-button');
-        profileSaveButton.addEventListener('click', () => this.saveProfile());
-      }
-    }
-
     // Temporary, to be replaced with routing
     // Breaks whan a page rerenders
     const links = document.querySelectorAll('a');
@@ -126,33 +98,6 @@ export default class App {
 
   changePage(page: string) {
     this.state.currentPage = page;
-    this.render();
-  }
-
-  enableProfileEdit() {
-    this.state.profileEdit = {
-      disabled: false,
-      changingData: true,
-      changingPassword: false,
-    };
-    this.render();
-  }
-
-  enablePasswordEdit() {
-    this.state.profileEdit = {
-      disabled: false,
-      changingData: false,
-      changingPassword: true,
-    };
-    this.render();
-  }
-
-  saveProfile() {
-    this.state.profileEdit = {
-      disabled: true,
-      changingData: false,
-      changingPassword: false,
-    };
     this.render();
   }
 }

@@ -220,10 +220,19 @@ body {
   outline: none;
   padding: 0;
   text-align: right;
+
+  &:disabled {
+    background-color: white;
+  }
 }
 
 .profile-input__error {
   display: none;
+}
+
+.profile__submit-error {
+  text-align: center;
+  color: var(--error-color);
 }
 
 .profile__edit-button {

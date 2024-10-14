@@ -45,11 +45,15 @@ export class Login extends Block {
   }
 
   validateLogin(value: string): void {
-    this.setProps(validateLogin(value));
+    this.setProps({
+      loginError: validateLogin(value),
+    });
   }
 
   validatePassword(value: string): void {
-    this.setProps(validatePassword(value));
+    this.setProps({
+      passwordError: validatePassword(value),
+    });
   }
 
   override render() {
