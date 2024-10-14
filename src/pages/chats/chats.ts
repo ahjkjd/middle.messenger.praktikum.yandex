@@ -1,50 +1,84 @@
-import { Button } from '../../components/button/Button';
-import { Footer } from '../../components/footer/Footer';
-import { Select } from '../../components/select/Select';
+import { Message } from '../../components/Message';
+import { ChatPreview } from '../../components/ChatPreview';
+import { Chat, IChat } from '../../components/Chat';
 import Block from '../../framework/Block';
 
-const mockQuestions = [
-  'Do you enjoy outdoor activities?',
-  'Are you a morning person?',
+const mockChats = [
+  {
+    name: 'Name 1',
+    Messages: [
+      {
+        id: '1-1',
+        text: 'Message 1',
+        time: '12:00',
+      },
+      {
+        id: '1-2',
+        text: 'Message 2',
+        time: '12:01',
+      },
+    ],
+  },
+  {
+    name: 'Name 2',
+    Messages: [
+      {
+        id: '2-1',
+        text: 'Message',
+        time: '10:00',
+      },
+    ],
+  },
 ];
 
-const moreMockQuestions = [
-  'Do you prefer coffee or tea?',
-  'Have you traveled abroad in the last year?',
-  'Do you have any pets?',
-];
-
-export class AnswerPage extends Block {
+export class Chats extends Block {
   constructor() {
-    
     super({
-      Footer: new Footer(),
-      Button: new Button({
-        disabled: false,
-        id: 'submit-answers',
-        text: 'Submit Answers',
-        onClick: () => this.addNewQuestions(),
-      }),
-      Questions: mockQuestions.map((item) => new Select({ id: mockQuestions.indexOf(item) + ' i', question: item })),
+      Chat: new Chat(mockChats[0] as IChat),
+      ChatList: mockChats.map(item => new ChatPreview({
+        id: mockChats.indexOf(item),
+        name: item.name,
+        text: item.Messages[item.Messages.length - 1].text,
+        time: item.Messages[item.Messages.length - 1].time,
+        unread: 0,
+        onClick: () => {
+          const id = mockChats.indexOf(item);
+          this.setChat(id);
+        },
+      })),
+      chatChosen: false,
     });
   }
 
-  addNewQuestions(): void {
-    let questions = (this.lists.Questions as Array<Select>).concat(
-      moreMockQuestions.map((item) => new Select({ id: moreMockQuestions.indexOf(item) + ' i', question: item })),
-    );
-    this.setLists({ Questions: questions });
+  setChat(id: number): void {
+    this.setProps({
+      chatChosen: true,
+    });
+    // Updating name when opening another chat
+    this.children.Chat.setProps(mockChats[id]);
+    // Updating message list . Memory leak?
+    this.children.Chat.setLists({ Messages: mockChats[id].Messages.map((item) => new Message(item)) });
+    
   }
 
   override render() {
     return `
-    <div class="app">
-      <h1>Answer Questionnaire</h1>
-      <div class="answer-questionnaire">
-        {{{ Questions }}}
+    <main class="chats">
+      <div class="chats__left">
+        <a href="#" class="chats__profile-link" data-page="profile">Профиль</a>
+        <input class="chats__search" placeholder="Поиск"/>
+        <ul class="chats__list">
+          {{{ ChatList }}}
+        </ul>
       </div>
-      {{{ Button }}}
-      {{{ Footer }}}
-    </div>`;
+      <div class="chats__right">`
+      + (this.props.chatChosen
+        ?
+        '{{{ Chat }}}'
+        :
+        '<p class="chats__landing">Выберите чат чтобы отправить сообщение</p>')
+        + `
+      </div>
+    </main>`;
   }
 }

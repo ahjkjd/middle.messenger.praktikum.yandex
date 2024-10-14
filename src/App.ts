@@ -3,6 +3,7 @@ import * as Pages from './pages/index.js';
 import { Err } from './pages/err/err';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
+import { Chats } from './pages/chats/chats';
 import { Profile, User } from './pages/profile/profile';
 
 interface AppState {
@@ -56,19 +57,11 @@ export default class App {
       const RegisterPage = new Register();
       this.appElement.replaceChildren(RegisterPage.getContent());
     } else if (this.state.currentPage === 'profile') {
-      // template = Handlebars.compile(Pages.Profile);
-      // this.appElement.innerHTML = template({
-      //   user: this.state.user,
-      //   profileEdit: this.state.profileEdit,
-      // });
-
       const ProfilePage = new Profile(testUser);
       this.appElement.replaceChildren(ProfilePage.getContent());
     } else if (this.state.currentPage === 'chats') {
-      template = Handlebars.compile(Pages.Chats);
-      this.appElement.innerHTML = template({
-        chats: [],
-      });
+      const ChatsPage = new Chats();
+      this.appElement.replaceChildren(ChatsPage.getContent());
     }
     this.attachEventListeners();
   }
@@ -85,6 +78,7 @@ export default class App {
     });
 
     // Temporary, to be replaced by form submission
+    // Breaks whan a page rerenders
     const buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
       if (button.dataset.page) {

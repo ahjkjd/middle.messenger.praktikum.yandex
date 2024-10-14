@@ -6,6 +6,7 @@ interface InputProps {
   class?: string;
   type?: string;
   value?: string;
+  placeholder? : string,
   onBlur: (e: Event) => void,
   onChange: (e: Event) => void,
 }
@@ -23,7 +24,7 @@ export class Input extends Block {
 
   override render(): string {
     return `
-    <input id="{{id}}" name="{{id}}" type="{{type}}" value="{{value}}" class="{{class}}__input"
+    <input id="{{id}}" name="{{id}}" type="{{type}}" value="{{value}}" class="{{class}}__input" placeholder="{{placeholder}}"
       {{#if disabled}}disabled{{/if}}/>`;
   }
 }

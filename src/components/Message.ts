@@ -1,13 +1,14 @@
 import Block from '../framework/Block';
 
-interface MessageProps {
-  // ofThisUser: boolean,
+export interface IMessage {
+  id: string,
   text: string,
   time: string,
+  // ofThisUser: boolean,
 }
 
 export class Message extends Block {
-  constructor(props: MessageProps) {
+  constructor(props: IMessage) {
     super({
       ...props,
     });
@@ -15,9 +16,9 @@ export class Message extends Block {
 
   override render(): string {
     return `
-    <li class="message">
+    <li class="message" id="{{id}}">
       <p class="message__text">{{text}}</p>
-      <span class="message__time">{{time}}</span>
+      <span class="message__time">{{time}}</span> 
     </li>`;
   }
 }
