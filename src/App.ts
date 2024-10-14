@@ -1,10 +1,10 @@
 import Handlebars from 'handlebars';
-import * as Pages from './pages/index.js';
 import { Err } from './pages/err/err';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 import { Chats } from './pages/chats/chats';
 import { Profile, User } from './pages/profile/profile';
+import { menu } from './pages/menu/menu.js';
 
 interface AppState {
   currentPage: string;
@@ -36,7 +36,7 @@ export default class App {
   render() {
     let template;
     if (this.state.currentPage === 'menu') {
-      template = Handlebars.compile(Pages.Menu);
+      template = Handlebars.compile(menu);
       this.appElement.innerHTML = template({});
     } else if (this.state.currentPage === 'notFound') {
       const notFoundPage = new Err({
