@@ -5,7 +5,7 @@ interface BlockProps {
   [key: string]: any;
 }
 
-export default class Block {
+export default abstract class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -44,6 +44,16 @@ export default class Block {
       }
     });
   }
+
+  private _removeEvents() {
+    const { events = {} } = this.props;
+    Object.keys(events).forEach(eventName => {
+      if (events[eventName] !== undefined) {
+        this._element?.removeEventListener(eventName, events[eventName]);
+      }
+    });
+  }
+    
 
   private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this) as EventCallback);
@@ -145,6 +155,8 @@ export default class Block {
   }
 
   private _render(): void {
+    this._removeEvents();
+
     const propsAndStubs = { ...this.props };
     const tmpId =  Math.floor(100000 + Math.random() * 900000);
     Object.entries(this.children).forEach(([key, child]) => {
