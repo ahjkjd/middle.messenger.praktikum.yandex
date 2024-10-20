@@ -1,6 +1,6 @@
 :root {
   --primary-color: #3369F3;
-  --secondary-color: #999999;
+  --secondary-color: #999;
   --text-color: #1E1E1E;
   --error-color: #FF2F2F;
   --chats-color: #FBFBFB;
@@ -8,35 +8,35 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
   color: var(--text-color);
+  font-family: Arial, sans-serif;
   margin: 0 auto;
 }
 
 .error-page {
   display: flex;
   flex-direction: column;
-  text-align: center;
   margin-top: 40%;
+  text-align: center;
 }
 
 .error-page__number {
-  margin: 0;
   font-size: 40px;
-  line-height: 40px;
   font-weight: normal;
+  line-height: 40px;
+  margin: 0;
 }
 
 .error-page__text {
-  margin: 20px 0 70px;
   font-size: 20px;
   line-height: 20px;
+  margin: 20px 0 70px;
 }
 
 .error-page__link {
   color: var(--primary-color);
-  text-decoration: none;
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     opacity: 0.8;
@@ -44,18 +44,18 @@ body {
 }
 
 .sign {
+  border-radius: 12px 0 0;
+  box-shadow: 0 0 5px rgb(0 0 0 / 10%);
   margin: 100px auto;
-  width: 280px;
   padding: 50px 30px 30px;
-  border-radius: 12px 0 0 0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  width: 280px;
 }
 
 .sign__heading {
-  margin: 0 auto 40px;
   font-size: 20px;
-  line-height: 20px;
   font-weight: normal;
+  line-height: 20px;
+  margin: 0 auto 40px;
   text-align: center;
 }
 
@@ -65,51 +65,51 @@ body {
 }
 
 .sign__caption {
-  margin: 0;
   color: var(--secondary-color);
   font-size: 9px;
   line-height: 9px;
+  margin: 0;
 }
 
 .sign__inputs {
+  list-style-type: none;
   margin: 0 0 40px;
   min-height: 230px;
-  list-style-type: none;
   padding: 0;
 }
 
 .sign__input {
-  width: 100%;
   border: none;
-  margin: 0;
-  padding: 7px 0;
-  outline: none;
   border-bottom: solid 1px var(--primary-color);
+  margin: 0;
+  outline: none;
+  padding: 7px 0;
+  width: 100%;
 }
 
 .sign__error {
-  margin: 0;
   color: var(--error-color);
   font-size: 8px;
-  line-height: 8px;
+  line-height: 10px;
+  margin: 5px 0 0;
 }
 
 .submit-button {
-  display: block;
-  width: 100%;
-  max-width: 280px;
-  min-height: 37px;
-  margin: 0 auto;
-  padding: 0;
+  background-color: var(--primary-color);
   border: none;
   border-radius: 8px;
-  background-color: var(--primary-color);
   color: white;
-  transition: opacity 0.4s;
-  font-weight: 400;
-  font-size: 13px;
-  text-align: center;
   cursor: pointer;
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0 auto;
+  max-width: 280px;
+  min-height: 37px;
+  padding: 0;
+  text-align: center;
+  transition: opacity 0.4s;
+  width: 100%;
 
   &:hover {
     opacity: 0.8;
@@ -117,13 +117,13 @@ body {
 }
 
 .sign__link {
+  color: var(--primary-color);
+  cursor: pointer;
   display: block;
+  font-size: 11px;
   margin: 14px auto 30px;
   text-align: center;
-  color: var(--primary-color);
   text-decoration: none;
-  font-size: 11px;
-  cursor: pointer;
 
   &:hover {
     opacity: 0.8;
@@ -131,36 +131,36 @@ body {
 }
 
 .profile {
-  margin: 60px auto;
-  max-width: 510px;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 60px auto;
+  max-width: 510px;
 }
 
 .profile__avatar-container {
   border: 0;
+  border-radius: 50%;
+  height: 130px;
   margin: 0;
   padding: 0;
   width: 130px;
-  height: 130px;
-  border-radius: 50%;
 
   &::before {
-    position: absolute;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    content: 'Поменять аватар';
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    cursor: pointer;
     background-color: black;
+    border-radius: 50%;
     color: white;
+    content: 'Поменять аватар';
+    cursor: pointer;
+    display: flex;
+    height: 130px;
+    justify-content: center;
     opacity: 0;
+    overflow: hidden;
+    position: absolute;
     transform: translate(0, -45px);
+    width: 130px;
   }
 
   &:hover::before {
@@ -170,37 +170,38 @@ body {
 
 /* For default picture only, for actual avatar styles should be different */
 .profile__avatar {
+  height: 40px;
   overflow: hidden;
   width: 40px;
-  height: 40px;
+
   /* border-radius: 50%; */
 }
 
 .profile__heading {
-  margin: 20px 0 0;
   font-size: 16px;
   font-weight: 600;
+  margin: 20px 0 0;
 }
 
 .profile__form {
-  width: 100%;
   font-size: 13px;
   line-height: 13px;
+  width: 100%;
 }
 
 .profile__inputs {
+  list-style-type: none;
   margin: 60px 0 20px;
   min-height: 230px;
-  list-style-type: none;
   padding: 0;
 }
 
 .profile-input__container {
+  display: flex;
+  justify-content: space-between;
   margin: 0 0 10px;
   padding: 0 0 7px;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
 
   &:not(:last-of-type) {
     border-bottom: solid 1px var(--boundary-color);
@@ -208,33 +209,42 @@ body {
 }
 
 .profile-input__caption {
+  color: var(--text-color);
   display: inline;
   margin: 0;
-  color: var(--text-color);
 }
 
 .profile-input__input {
-  padding: 0;
   border: none;
-  outline: none;
-  text-align: right;
   color: var(--secondary-color);
+  outline: none;
+  padding: 0;
+  text-align: right;
+
+  &:disabled {
+    background-color: white;
+  }
 }
 
 .profile-input__error {
   display: none;
 }
 
+.profile__submit-error {
+  color: var(--error-color);
+  text-align: center;
+}
+
 .profile__edit-button {
-  margin: 0 0 10px;
-  padding: 0 0 7px;
-  border: none;
-  width: 100%;
-  text-align: left;
   background-color: white;
+  border: none;
   border-bottom: solid 1px var(--boundary-color);
   color: var(--primary-color);
   cursor: pointer;
+  margin: 0 0 10px;
+  padding: 0 0 7px;
+  text-align: left;
+  width: 100%;
 
   &:hover {
     opacity: 0.8;
@@ -242,14 +252,14 @@ body {
 }
 
 .profile__exit-button {
-  margin: 0 0 10px;
-  padding: 0 0 7px;
-  border: none;
-  width: 100%;
-  text-align: left;
   background-color: white;
+  border: none;
   color: var(--error-color);
   cursor: pointer;
+  margin: 0 0 10px;
+  padding: 0 0 7px;
+  text-align: left;
+  width: 100%;
 
   &:hover {
     opacity: 0.8;
@@ -263,35 +273,34 @@ body {
 }
 
 .chats__left {
-  padding: 10px;
-  width: 310px;
-  display: flex;
-  flex-direction: column;
   background-color: var(--chats-color);
   border-right: solid 1px var(--boundary-color);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 310px;
 }
 
 .chats__profile-link {
+  color: var(--secondary-color);
+  font-size: 12px;
   margin: 10px 0;
   text-align: right;
-  color: var(--secondary-color);
   text-decoration: none;
-  font-size: 12px;
 }
 
 .chats__search {
-  height: 32px;
-  padding: 0;
-  border: none;
   background-color: #EFEFEF;
-  text-align: center;
-  outline: none;
-  margin: 10px 0;
-  font-size: 12px;
-
-  background-image: url(/src/images/search.svg);
-  background-repeat: no-repeat;
+  background-image: url("/src/images/search.svg");
   background-position: 110px 6px;
+  background-repeat: no-repeat;
+  border: none;
+  font-size: 12px;
+  height: 32px;
+  margin: 10px 0;
+  outline: none;
+  padding: 0;
+  text-align: center;
 
   &:focus {
     background-image: none;
@@ -299,15 +308,181 @@ body {
 }
 
 .chats__right {
-  width: calc(100% - 310px);
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: calc(100% - 310px);
 }
 
 .chats__landing {
-  font-size: 12px;
   color: var(--secondary-color);
+  font-size: 12px;
   text-align: center;
   vertical-align: middle;
+}
+
+.chats__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-preview {
+  border-bottom: solid 1px var(--boundary-color);
+  cursor: pointer;
+  display: flex;;
+  height: 50px;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.chat-preview__container {
+  flex: auto;
+  margin: 0 10px;
+}
+
+.chat-preview__name {
+  color: var(--text-color);
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.chat-preview__text {
+  color: var(--secondary-color);
+  font-size: 12px;
+  line-height: 15px;
+  margin: 0;
+}
+
+.chat-preview__time {
+  color: var(--secondary-color);
+  display: block;
+  font-size: 9px;
+  margin: 0;
+  text-align: right;
+}
+
+.chat-preview__unread {
+  align-items: center;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  font-size: 11px;
+  height: 20px;
+  justify-content: center;
+  margin: 13px 0 0 10px;
+  text-align: right;
+  width: 20px;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.chat__messages {
+  flex: auto;
+  list-style: none;
+  margin: 10px 0;
+  overflow: scroll;
+  padding: 0;
+}
+
+.chat__header {
+  align-items: center;
+  border-bottom: solid 1px var(--boundary-color);
+  display: flex;
+  height: 34px;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.chat__user {
+  display: flex;
+}
+
+.chat__name {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 10px;
+}
+
+.chat__options {
+  background-color: white;
+  background-image: url("/src/images/options.svg");
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  height: 15px;
+  padding: 0;
+  width: 3px;
+}
+
+.chat__footer {
+  border-top: solid 1px var(--boundary-color);
+  display: flex;
+  gap: 10px;
+  height: 34px;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.chat__input {
+  background-color: var(--secondary-color);
+  background-color: #EFEFEF;
+  border: none;
+  border-radius: 30px;
+  flex: auto;
+  font-size: 12px;
+  height: 32px;
+  outline: none;
+  padding: 0 0 0 15px;
+}
+
+.chat__attach {
+  background-color: white;
+  background-image: url("/src/images/attach.svg");
+  border: none;
+  cursor: pointer;
+  height: 32px;
+  padding: 0;
+  width: 32px;
+}
+
+.chat__send {
+  background-color: white;
+  background-image: url("/src/images/send.svg");
+  border: none;
+  cursor: pointer;
+  height: 28px;
+  padding: 0;
+  width: 28px;
+}
+
+.message {
+  background-color: #F8F8F8;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 11px 0;
+  padding: 11px;
+  position: relative;
+}
+
+.message__text {
+  margin: 0;
+}
+
+.message__time {
+  bottom: 10px;
+  font-size: 9px;
+  margin: 0;
+  position: absolute;
+  right: 10px;
 }

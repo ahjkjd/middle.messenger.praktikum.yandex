@@ -17,4 +17,4 @@ https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/
 
 ## Веб-приложение
 
-Netlify: 
+Netlify: https://deploy--marvelous-axolotl-46501e.netlify.app
